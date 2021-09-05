@@ -5,20 +5,6 @@ import (
 	"time"
 )
 
-// fem över
-// tio över
-// kvar över
-// tjugo över
-
-// fem i halv 		(tjugofem över)
-// halv
-// fem över halv	(tjugofem i)
-
-// tjugo i
-// kvart i
-// tio i
-// fem i
-
 func main() {
 	// check the time
 	// round down to nearest
@@ -39,39 +25,33 @@ func timeToString(t time.Time) string {
 	}
 
 	// refer to next hour for all "to" times
-	if m >= 30 {
+	if m >= 25 {
 		h += 1
 	}
 
-	fives := m / 5 * 5
+	fives := m / 5
 
-	var preposition string
-	switch {
-	case fives == 0:
-		return fmt.Sprintf("Klockan är %v + %v", hText[h], m%5)
-	case fives == 30:
-		return fmt.Sprintf("Klockan är %v %v + %v", mText[fives], hText[h], m%5)
-	case fives > 30:
-		preposition = "i"
-	case fives < 30:
-		preposition = "över"
+	fmt.Println(fives)
+
+	if fives == 0 {
+		return fmt.Sprintf("%v", hText[h])
 	}
 
-	return fmt.Sprintf("Klockan är %v %v %v + %v", mText[fives], preposition, hText[h], m%5)
+	return fmt.Sprintf("%v %v", mText[fives], hText[h])
 }
 
 var mText = map[int]string{
-	5:  "fem",
-	10: "tio",
-	15: "kvart",
-	20: "tjugo",
-	25: "tjugofem",
-	30: "halv",
-	35: "tjugofem",
-	40: "tjugo",
-	45: "kvart",
-	50: "tio",
-	55: "fem",
+	1:  "fem över",
+	2:  "tio över",
+	3:  "kvart över",
+	4:  "tjugo över",
+	5:  "fem i halv",
+	6:  "halv",
+	7:  "fem över halv",
+	8:  "tjugo i",
+	9:  "kvart i",
+	10: "tio i",
+	11: "fem i",
 }
 
 var hText = map[int]string{
@@ -87,4 +67,5 @@ var hText = map[int]string{
 	9:  "nio",
 	10: "tio",
 	11: "elva",
+	12: "tolv",
 }
