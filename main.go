@@ -14,12 +14,14 @@ func main() {
 	// round down to nearest
 	now := time.Now()
 	s := timeToString(now)
+	p := timeToPinOut(now)
 
-	fmt.Println(s)
+	fmt.Println("Klockan är", s)
+	fmt.Printf("%b \n", p)
 
 }
 
-func enumerate(t time.Time) (h, m int) {
+func reduce(t time.Time) (h, m int) {
 	h = t.Hour()
 	minutes := t.Minute()
 
@@ -38,7 +40,7 @@ func enumerate(t time.Time) (h, m int) {
 }
 
 func timeToString(t time.Time) string {
-	hours, fives := enumerate(t)
+	hours, fives := reduce(t)
 
 	if fives == 0 {
 		return fmt.Sprintf("%v", hText[hours])
@@ -48,7 +50,7 @@ func timeToString(t time.Time) string {
 }
 
 func timeToPinOut(t time.Time) (out int64) {
-	h, fives := enumerate(t)
+	h, fives := reduce(t)
 
 	for _, elem := range mPinOut[fives] {
 		out = out | 1<<(elem)
